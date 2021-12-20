@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>有家--注册</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+	<!-- 导航条 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+	<a class="navbar-brand">有家</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+		aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" href="index.jsp">登录</a></li>
+			<li class="nav-item"><a class="nav-link" href="reg.jsp">注册</a></li>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#"
+				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+				aria-expanded="false"> 制作者信息 </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item">潘烨</a> <a class="dropdown-item">19计算机2班</a>
+					<a class="dropdown-item">190110910815</a>
+				</div></li>
+		</ul>
+	</div>
+</nav>
+
+	<div class="container">
+		
+		<!-- 内容  -->
+		<div class="row" style="margin-top: 10px">
+
+			<div class="col-lg-12">
+
+				<div class="card">
+					<div class="card-header">用户注册</div>
+					<div class="card-body">
+
+						<form method="get" action="/RegAction"
+							enctype="multipart/form-data">
+							<div class="form-group row">
+								<label for="inputEmail3" class="col-sm-3 col-form-label">用户名</label>
+								<div class="col-sm-8">
+									<input type="text" name="username" class="form-control"
+										id="inputEmail3" placeholder="用户名" required>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-3 col-form-label">密码</label>
+								<div class="col-sm-8">
+									<input type="password" name="password" class="form-control"
+										id="inputPassword3" placeholder="密码">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-3 col-form-label">性别</label>
+								<div class="col-sm-1">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="sex"
+											value="男" id="sex1"> <label class="form-check-label"
+											for="sex1">男</label>
+									</div>
+								</div>
+								<div class="col-sm-1">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="sex"
+											value="女" id="sex2"> <label class="form-check-label"
+											for="sex2">女</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-3 col-form-label">是否喜爱动物：</label>
+								<div class="col-sm-1">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio"
+											name="love_animal" value="是" id="love_animal1"> <label
+											class="form-check-label" for="love_animal1">是</label>
+									</div>
+								</div>
+								<div class="col-sm-1">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio"
+											name="love_animal" value="否" id="love_animal2"> <label
+											class="form-check-label" for="love_animal2">否</label>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-3 col-form-label">月收入</label>
+								<div class="col-sm-3">
+									<select class="form-control" id="exampleFormControlSelect1"
+										name="property">
+										<option value="null">null</option>
+										<option value="1000元以下">1000元以下</option>
+										<option value="1000-8000元">1000-8000元</option>
+										<option value="8000-15000元">8000-15000元</option>
+										<option value="15000元以上">15000元以上</option>
+
+									</select>
+								</div>
+							</div>
+
+
+							<div class="form-group row">
+								<div class="col-sm-10">
+									<button type="submit" class="btn btn-primary">注册</button>
+								</div>
+							</div>
+						</form>
+
+
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>有家——流浪动物领养计划</title>
+<!-- bootstrap框架 -->
+<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+
+	<!-- 导航条 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+	<a class="navbar-brand">有家</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+		aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link" href="main.jsp">主页
+					<span class="sr-only">(current)</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="index.jsp">登录</a></li>
+			<li class="nav-item"><a class="nav-link" href="reg.jsp">注册</a></li>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> <%= returnVal %></a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="myInfo.html">我的信息</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="index.html">注销</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#"
+				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+				aria-expanded="false"> 制作者信息 </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item">潘烨</a> <a class="dropdown-item">19计算机2班</a>
+					<a class="dropdown-item">190110910815</a>
+				</div></li>
+		</ul>
+	</div>
+</nav>
+
+	<div class="container" style="margin-top: 30px">
+
+		<div class="row">
+			<div class="col-sm-4">
+				<h2>关于我</h2>
+				<div class="fakeimg">
+					<img src="photo/love.jpg" width="300" height="200">
+				</div>
+				<p>关于我的个人信息..</p>
+				<h3>一些链接</h3>
+				<p>点击补充信息，需填补完整后才可申请领养</p>
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item"><a class="nav-link active" href="#">修改密码</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#">补充详细地址</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">补充月收入</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">禁用</a>
+					</li>
+				</ul>
+				<hr class="d-sm-none">
+			</div>
+			<div class="col-sm-8">
+				<h2>我的信息</h2>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<h5>用户名：${user.username}</h5>
+					</div>
+					<div class="col-sm-4">
+						<h5>密码：${user.password}</h5>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<p>性别：${user.sex}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<p>省份：${user.province}</p>
+					</div>
+					<div class="col-sm-4">
+						<p>详细地址：${user.address}</p>
+					</div>
+
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<p>是否喜爱动物：${user.love_animal}</p>
+					</div>
+					<div class="col-sm-4">
+						<p>是否有过志愿者活动：${user.voluntary_act}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<p>月收入：${user.property}</p>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-8"></div>
+					<div class="col-sm-4">
+						<a type="button" class="btn btn-outline-primary" href="main.jsp">返回主页</a>
+					</div>
+				</div>
+
+				<br>
+			</div>
+		</div>
+	</div>
+
+	<div class="jumbotron text-center" style="margin-bottom: 0">
+		<p></p>
+	</div>
+</body>
+</html>
