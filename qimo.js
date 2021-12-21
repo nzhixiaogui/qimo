@@ -14,7 +14,8 @@ const schema={
    property:String
 }
 const User = mongoose.model('users', schema);
-module.exports = User;
+var usern;
+//module.exports = User;
 // const kitty = new mydata({ name: 'testZildjian3' });
 // kitty.save()
 // router.get('/', function(req, res, next) {
@@ -31,9 +32,11 @@ app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', router);
 
-router.get('/', function(req, res) {
-    console.log("主页跳转")
-    res.redirect('login.html');
+app.get('/home', function(req, res) {
+    var name = usern.username.toString();
+    ejs.renderFile("public/home.html",{returnVal:name},(err,str)=>{
+        res.send(str)
+    })
 })
 
 app.get('/LoginAction', function(req, res) {
@@ -52,7 +55,8 @@ app.get('/LoginAction', function(req, res) {
             console.log(cpwd)
             if (pwd == cpwd) {
                 console.log('登录成功！')
-                var name = usn.toString();
+                usern = content
+                var name = usern.username.toString();
                 ejs.renderFile("public/home.html",{returnVal:name},(err,str)=>{
                     res.send(str)
                 })
@@ -66,19 +70,21 @@ app.get('/LoginAction', function(req, res) {
     });
 })
 
-// router.get('/turnreg', function(req, res) {
-//     console.log("跳转至注册")
-//     res.redirect('reg.html');
-// })
+app.get('/myInfo', function(req, res) {
+    var name = usern.username.toString();
+    var password = usern.password.toString();
+    var sex = usern.sex.toString();
+    var love = usern.love_animal.toString();
+    var ppt = usern.property.toString();
 
-// router.get('/RegAction', function(req, res) {
-//     const kitty = new mydata({ name: req.query.num1,health:req.query.num2 });
-//     console.log("reg跳转")
-//     console.log(req.query.username)
-//     console.log(req.query.password)
-//     //res.redirect('home')
-//     res.redirect('login.html');
-// })
+    ejs.renderFile("public/myInfo.html",{usern:name,userp:password,users:sex,userl:love,userpp:ppt},(err,str)=>{
+        res.send(str)
+    })
+ })
+
+router.get('/LogOut', function(req, res) {
+    res.redirect('index.html');
+})
 app.get('/RegAction', function(req, res) {
     var usn = req.query.username;
     var pwd = req.query.password;
@@ -124,25 +130,65 @@ app.get('/RegAction', function(req, res) {
             }
     })
 })
-// app.get("/RegAction",(req,res)=>{
-//     res.type('.html')
-//     console.log(req.query.username)
-//     console.log(req.query.password)
-//     console.log(req.query.sex)
-//     console.log(req.query.love_animal)
-//     console.log(req.query.property)
-//     //const kitty = new mydata({ name: req.query.num1,health:req.query.num2 });
-//     //kitty.save()
-//     // ejs.renderFile(filename, data, options, function(err, str){
-//     //     // str => 输出渲染后的 HTML 字符串
-//     // });
-//     //ejs.renderFile("index.html",{returnName:"success"},(err,str)=>{
-//     //    res.send(str)
-//     //})
+app.get('/reg', function(req, res) {
+    var name = usern.username.toString();
+    ejs.renderFile("public/reg2.html",{returnName:name},(err,str)=>{
+        res.send(str)
+    })
+})
+
+app.get('/RegAction1', function(req, res) {
+    var name = usern.username.toString();
+    var usn = req.query.username;
+    var pwd = req.query.password;
+    var sex = req.query.sex;
+    var lva = req.query.love_animal;
+    var ppt = req.query.property;
+    User.findOne({ username: usn }, function(err, result) {
+            if (result != null) {
+                console.log("用户名重复！")
+                ejs.renderFile("public/reg3.html",{returnVal:"用户名重复 注册失败！",returnName:name},function(err,str){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.setHeader('Content-Type','text/html');
+                        res.send(str);
+                    }
+                })
+            } else {
+                User.create({
+                    username:usn,
+                    password: pwd,
+                    sex:sex,
+                    love_animal:lva,
+                    property:ppt
+                }, function(err1, doc) {
+                    if (err1) {
+                        console.log('注册失败！')
+                        console.log(err1);
+                        //res.send({ succeed: false, message: '注册失败！' });
+                        ejs.renderFile("public/reg3.html",{returnVal:"注册失败！",returnName:name},(err,str)=>{
+                            res.send(str)
+                        })
+                    } else {
+                        console.log('注册成功！')
+                        ejs.renderFile("public/reg3.html",{returnVal:"注册成功！",returnName:name},(err,str)=>{
+                            res.send(str)
+                        })
+                        //res.send({ succeed: true, message: '注册成功！' });
+                        //res.redirect('login.html');
+                    }
+                })
+            }
+    })
+})
+
+app.get('/animallist', function(req, res) {
+    var name = usern.username.toString();
+    ejs.renderFile("public/anilist.html",{returnName:name},(err,str)=>{
+        res.send(str)
+    })
+})
     
-// })
-/*登录功能*/
-// app.get('/LoginAction', function(req, res){
-//    console.log("登陆")
-// })
 app.listen(08150)

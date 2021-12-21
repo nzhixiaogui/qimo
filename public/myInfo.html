@@ -19,29 +19,21 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="main.jsp">主页
+			<li class="nav-item active"><a class="nav-link" href="/home">主页
 					<span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="index.jsp">登录</a></li>
-			<li class="nav-item"><a class="nav-link" href="reg.jsp">注册</a></li>
+			<li class="nav-item"><a class="nav-link" href="/LogOut">登出</a></li>
+			<li class="nav-item"><a class="nav-link" href="/reg">注册</a></li>
 			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				class="nav-link" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> <%= returnVal %></a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="myInfo.html">我的信息</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="index.html">注销</a>
-				</div>
+				aria-expanded="false"> Welcome <%= usern %></a>
 			</li>
 			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#"
+				class="nav-link" 
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-				aria-expanded="false"> 制作者信息 </a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item">潘烨</a> <a class="dropdown-item">19计算机2班</a>
-					<a class="dropdown-item">190110910815</a>
-				</div></li>
+				aria-expanded="false"> 制作者信息:潘 19计算机2班</a>
+				</li>
 		</ul>
 	</div>
 </nav>
@@ -60,55 +52,43 @@
 				<ul class="nav nav-pills flex-column">
 					<li class="nav-item"><a class="nav-link active" href="#">修改密码</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">补充详细地址</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">补充月收入</a></li>
+					<li class="nav-item"><a class="nav-link" >待增加</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">禁用</a>
 					</li>
 				</ul>
 				<hr class="d-sm-none">
 			</div>
 			<div class="col-sm-8">
-				<h2>我的信息</h2>
+				<h2 style="color: rgb(64, 147, 224)">我的信息</h2>
 				<div class="form-group row">
 					<div class="col-sm-6">
-						<h5>用户名：${user.username}</h5>
+						<h4>用户名：<%= usern %></h4>
 					</div>
-					<div class="col-sm-4">
-						<h5>密码：${user.password}</h5>
+					<div class="col-sm-6">
+						<h4>密码：<%= userp %></h4>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-8">
-						<p>性别：${user.sex}</p>
-					</div>
-				</div>
-				<div class="form-group row">
-					<div class="col-sm-6">
-						<p>省份：${user.province}</p>
-					</div>
-					<div class="col-sm-4">
-						<p>详细地址：${user.address}</p>
-					</div>
-
-				</div>
-				<div class="form-group row">
-					<div class="col-sm-6">
-						<p>是否喜爱动物：${user.love_animal}</p>
-					</div>
-					<div class="col-sm-4">
-						<p>是否有过志愿者活动：${user.voluntary_act}</p>
+						<h5>性别：<%= users %></h5>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-8">
-						<p>月收入：${user.property}</p>
+						<h5>是否喜爱动物：<%= userl %></h5>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<h5>月收入：<%= userpp %></h5>
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<div class="col-sm-8"></div>
-					<div class="col-sm-4">
-						<a type="button" class="btn btn-outline-primary" href="main.jsp">返回主页</a>
+					<div class="col-sm-9"></div>
+					<div class="col-sm-3">
+						<a type="button" class="btn btn-outline-primary" href="/home">返回主页</a>
 					</div>
 				</div>
 
