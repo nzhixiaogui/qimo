@@ -2,10 +2,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>有家</title>
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
+
 
 	<div class="container">
 
@@ -37,7 +38,6 @@
 		</ul>
 	</div>
 </nav>
-
 		<!-- 内容  -->
 		
 
@@ -46,15 +46,16 @@
 		<div class="col-lg-3">
 
             <!-- 左边栏 -->
-            <div class="list-group">
-                <a href="/myInfo" class="list-group-item list-group-item-action">我的信息</a>
-                <a href="#" class="list-group-item list-group-item-action">领养列表</a> <a
-                    href="ApplyListServlet"
-                    class="list-group-item list-group-item-action">我的领养申请</a> <a
-                    href="upload.jsp" class="list-group-item list-group-item-action">流浪动物上传</a>
-                <a
-                    href="/LogOut" class="list-group-item list-group-item-action">登出</a>
-            </div>
+				<div class="list-group">
+					<a href="/myInfo" class="list-group-item list-group-item-action">我的信息</a>
+					<a href="/animallist"
+						class="list-group-item list-group-item-action">领养列表</a> <a
+						href="/myapply"
+						class="list-group-item list-group-item-action">我的领养申请</a> <a
+						href="/anipost" class="list-group-item list-group-item-action">流浪动物上传</a>
+					<a
+						href="/LogOut" class="list-group-item list-group-item-action">登出</a>
+				</div>
         
         
         </div>
@@ -73,24 +74,32 @@
 								<th scope="col">名称</th>
 								<th scope="col">种类</th>
 								<th scope="col">品种</th>
+								<th scope="col">年龄</th>
 								<th scope="col">详情</th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<c:forEach items="${animalList}" var="item" varStatus="i">
+							<% for(var i=0; i<searchani.length;i++){%>
 								<tr>
-									<td>${i.id}</td>
-									<td>${i.name}</td>
-									<td>${i.animal}</td>
-									<td>${i.variety}</td>
-									<td><a type="button" class="btn btn-danger"
-										href="AniInfo?id=${item.id}">查看详情</a></td>
+									<td><%=i+1%></td>
+									<td><%=searchani[i].name%></td>
+									<td><%=searchani[i].animal%></td>
+									<td><%=searchani[i].variety%></td>
+									<td><%=searchani[i].age%></td>
+									<td><form action="/more" method="get"><button type="submit" class="btn btn-info" name = index value=<%=i%>>查看详情</button></form></td>
 								</tr>
-							</c:forEach>
+							<% }%>
 						</tbody>
 					</table>
 
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+					</div>
+					<div class="col-sm-2">
+						<a type="button" class="btn btn-dark" href="/home">返回主页</a>
+					</div>
 				</div>
 			</div>
 		</div>

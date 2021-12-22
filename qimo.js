@@ -6,26 +6,27 @@ router = express.Router();
 mongoose.connect('mongodb://172.21.2.236:27017/190110910815');
 
 const path = require('path');
-const schema={
+const schema0={
    username:String,
    password:String,
    sex:String,
    love_animal:String,
    property:String
 }
-const User = mongoose.model('users', schema);
+const User = mongoose.model('users', schema0);
+const schema1={
+    name:String,
+    sex:String,
+    age:String,
+    animal:String,
+    variety:String,
+    vaccine:String,
+    phone:Number,
+    other:String,
+    index:Number
+ }
+ const Ani = mongoose.model('animals', schema1);
 var usern;
-//module.exports = User;
-// const kitty = new mydata({ name: 'testZildjian3' });
-// kitty.save()
-// router.get('/', function(req, res, next) {
-//     res.redirect('/home');
-// });
-
-// router.get('/home', function(req, res) {
-//     res.render('home');
-// })
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
@@ -186,9 +187,80 @@ app.get('/RegAction1', function(req, res) {
 
 app.get('/animallist', function(req, res) {
     var name = usern.username.toString();
-    ejs.renderFile("public/anilist.html",{returnName:name},(err,str)=>{
+    Ani.find(function(err,search){
+        if(err){console.log("查找失败！")}
+        else{
+            console.log("查找成功！")
+            ejs.renderFile("public/anilist.html",{returnName:name,searchani:search},(err,str)=>{
+                res.send(str)
+            })
+        }
+    })
+})
+
+app.get('/anipost', function(req, res) {
+    var name = usern.username.toString();
+    ejs.renderFile("public/anipost.html",{returnName:name},(err,str)=>{
         res.send(str)
     })
 })
-    
+
+app.get('/apost', function(req, res) {
+    var name = usern.username.toString();
+    var aname = req.query.name;
+    var sex = req.query.sex;
+    var age = req.query.age;
+    var ani = req.query.animal;
+    var vari = req.query.variety;
+    var vacc = req.query.vaccine;
+    var ph = req.query.phone;
+    var oth = req.query.other;
+    var i;
+    Ani.find(function(err,search){
+        if(err){console.log("search失败！")}
+        else{
+            console.log("search成功！")
+            i = search.length;
+        }
+    })
+    console.log(i)
+    // Ani.create({
+    //     name:aname,
+    //     sex:sex,
+    //     age:age,
+    //     animal:ani,
+    //     variety:vari,
+    //     vaccine:vacc,
+    //     phone:ph,
+    //     other:oth,
+    //     index:i
+    // }, function(err1, doc) {
+    //     if (err1) {
+    //         console.log('上传失败！')
+    //         console.log(err1);
+    //         ejs.renderFile("public/anipost1.html",{returnName:name,returnVal:"上传失败！"},(err,str)=>{
+    //             res.send(str)
+    //         })
+    //     } else {
+    //         console.log('上传成功！')
+    //         ejs.renderFile("public/anipost1.html",{returnName:name,returnVal:"上传成功！"},(err,str)=>{
+    //             res.send(str)
+    //         })
+    //     }
+    // })
+})
+
+app.get('/more',function(req, res) {
+    var name = usern.username.toString();
+    var i = req.query.index
+    console.log(i)
+    Ani.findOne({index: i}, function (err, content) {
+        if(err){console.log("查看详情失败！")}
+        else{
+            ejs.renderFile("public/aniinfo.html",{returnName:name,info:content},(err,str)=>{
+                res.send(str)
+            })
+        }
+    })
+})
 app.listen(08150)

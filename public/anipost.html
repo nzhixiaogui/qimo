@@ -6,8 +6,12 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
+	
 
-	<!-- 导航条 -->
+
+	<div class="container">
+
+		<!-- 导航条 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 	<a class="navbar-brand">有家</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -18,8 +22,8 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
 			<li class="nav-item active"><a class="nav-link" href="/home">主页
-				<span class="sr-only">(current)</span>
-		</a></li>
+					<span class="sr-only">(current)</span>
+			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/LogOut">登出</a></li>
 			<li class="nav-item"><a class="nav-link" href="/reg">注册</a></li>
 			<li class="nav-item dropdown"><a
@@ -35,14 +39,12 @@
 		</ul>
 	</div>
 </nav>
-
-	<div class="container">
-		
 		<!-- 内容  -->
 		<div class="row" style="margin-top: 10px">
+
 			<div class="col-lg-3">
 
-				<!-- 左边栏 -->
+                <!-- 左边栏 -->
 				<div class="list-group">
 					<a href="/myInfo" class="list-group-item list-group-item-action">我的信息</a>
 					<a href="/animallist"
@@ -53,33 +55,27 @@
 					<a
 						href="/LogOut" class="list-group-item list-group-item-action">登出</a>
 				</div>
-			
-			
-			</div>
+            
+            
+            </div>
 
 			<div class="col-lg-9">
 
+
 				<div class="card">
-					<div class="card-header">用户注册</div>
+					<div class="card-header">流浪动物信息上传</div>
 					<div class="card-body">
-						<p style="color: red"><%= returnVal %></p>
-						<form method="get" action="/RegAction"
+
+						<form method="get" action="/apost"
 							enctype="multipart/form-data">
 							<div class="form-group row">
-								<label for="inputEmail3" class="col-sm-3 col-form-label">用户名</label>
+								<label for="inputEmail3" class="col-sm-3 col-form-label">名字</label>
 								<div class="col-sm-8">
-									<input type="text" name="username" class="form-control"
-										id="inputEmail3" placeholder="用户名" required>
+									<input type="text" name="name" class="form-control"
+										id="inputEmail3" placeholder="名字" required>
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="inputPassword3" class="col-sm-3 col-form-label">密码</label>
-								<div class="col-sm-8">
-									<input type="password" name="password" class="form-control"
-										id="inputPassword3" placeholder="密码">
-								</div>
-							</div>
 
 							<div class="form-group row">
 								<label for="inputPassword3" class="col-sm-3 col-form-label">性别</label>
@@ -100,46 +96,67 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="inputPassword3" class="col-sm-3 col-form-label">是否喜爱动物：</label>
-								<div class="col-sm-1">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio"
-											name="love_animal" value="是" id="love_animal1"> <label
-											class="form-check-label" for="love_animal1">是</label>
-									</div>
+								<label for="inputEmail3" class="col-sm-3 col-form-label">年龄</label>
+								<div class="col-sm-8">
+									<input type="text" name="age" class="form-control"
+										id="inputEmail3" placeholder="年龄" required>
 								</div>
-								<div class="col-sm-1">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio"
-											name="love_animal" value="否" id="love_animal2"> <label
-											class="form-check-label" for="love_animal2">否</label>
-									</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-3 col-form-label">动物种类</label>
+								<div class="col-sm-3">
+									<select class="form-control" id="exampleFormControlSelect1"
+										name="animal">
+										<option value="猫">猫</option>
+										<option value="犬">犬</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" placeholder="品种"
+										name="variety">
 								</div>
 							</div>
 
 
 							<div class="form-group row">
-								<label for="inputPassword3" class="col-sm-3 col-form-label">月收入</label>
-								<div class="col-sm-3">
-									<select class="form-control" id="exampleFormControlSelect1"
-										name="property">
-										<option value="null">null</option>
-										<option value="1000元以下">1000元以下</option>
-										<option value="1000-8000元">1000-8000元</option>
-										<option value="8000-15000元">8000-15000元</option>
-										<option value="15000元以上">15000元以上</option>
+								<label for="inputPassword3" class="col-sm-3 col-form-label">是否已打疫苗</label>
+								<div class="col-sm-1">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="vaccine"
+											value="是" id="vaccine1"> <label
+											class="form-check-label" for="vaccine1">是</label>
+									</div>
+								</div>
+								<div class="col-sm-1">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="vaccine"
+											value="否" id="vaccine2"> <label
+											class="form-check-label" for="vaccine2">否</label>
+									</div>
+								</div>
+							</div>
 
-									</select>
+							<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-3 col-form-label">联系电话</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" placeholder="电话"
+										name="phone">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label for="exampleFormControlTextarea1" class="col-sm-3 col-form-label">其他</label>
+								<div class="col-sm-8">
+									<textarea class="form-control" id="exampleFormControlTextarea1" placeholder="补充"
+										rows="3" name="other"></textarea>
 								</div>
 							</div>
 
 
 							<div class="form-group row">
 								<div class="col-sm-10">
-									<button type="submit" class="btn btn-primary">注册</button>
-								</div>
-								<div class="col-sm-2">
-									<a type="button" class="btn btn-dark" href="/home">返回主页</a>
+									<button type="submit" class="btn btn-primary">上传</button>
 								</div>
 							</div>
 						</form>
