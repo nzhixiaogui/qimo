@@ -24,9 +24,10 @@ const schema1={
     phone:Number,
     other:String,
     index:Number
- }
- const Ani = mongoose.model('animals', schema1);
+}
+const Ani = mongoose.model('animals', schema1);
 var usern;
+var i;
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
@@ -200,8 +201,17 @@ app.get('/animallist', function(req, res) {
 
 app.get('/anipost', function(req, res) {
     var name = usern.username.toString();
-    ejs.renderFile("public/anipost.html",{returnName:name},(err,str)=>{
-        res.send(str)
+    Ani.find(function(err,search){
+        if(err){console.log("search失败！");console.log(err);}
+        else{
+            console.log("search成功！")
+            i = Number(search.length);
+            console.log(typeof i)
+            console.log(i)
+            ejs.renderFile("public/anipost.html",{returnName:name},(err,str)=>{
+                res.send(str)
+            })
+        }
     })
 })
 
@@ -215,39 +225,32 @@ app.get('/apost', function(req, res) {
     var vacc = req.query.vaccine;
     var ph = req.query.phone;
     var oth = req.query.other;
-    var i;
-    Ani.find(function(err,search){
-        if(err){console.log("search失败！")}
-        else{
-            console.log("search成功！")
-            i = search.length;
+    
+    console.log(typeof i)
+    Ani.create({
+        name:aname,
+        sex:sex,
+        age:age,
+        animal:ani,
+        variety:vari,
+        vaccine:vacc,
+        phone:ph,
+        other:oth,
+        index:i
+    }, function(err1, doc) {
+        if (err1) {
+            console.log('上传失败！')
+            console.log(err1);
+            ejs.renderFile("public/anipost1.html",{returnName:name,returnVal:"上传失败！"},(err,str)=>{
+                res.send(str)
+            })
+        } else {
+            console.log('上传成功！')
+            ejs.renderFile("public/anipost1.html",{returnName:name,returnVal:"上传成功！"},(err,str)=>{
+                res.send(str)
+            })
         }
     })
-    console.log(i)
-    // Ani.create({
-    //     name:aname,
-    //     sex:sex,
-    //     age:age,
-    //     animal:ani,
-    //     variety:vari,
-    //     vaccine:vacc,
-    //     phone:ph,
-    //     other:oth,
-    //     index:i
-    // }, function(err1, doc) {
-    //     if (err1) {
-    //         console.log('上传失败！')
-    //         console.log(err1);
-    //         ejs.renderFile("public/anipost1.html",{returnName:name,returnVal:"上传失败！"},(err,str)=>{
-    //             res.send(str)
-    //         })
-    //     } else {
-    //         console.log('上传成功！')
-    //         ejs.renderFile("public/anipost1.html",{returnName:name,returnVal:"上传成功！"},(err,str)=>{
-    //             res.send(str)
-    //         })
-    //     }
-    // })
 })
 
 app.get('/more',function(req, res) {
@@ -262,5 +265,43 @@ app.get('/more',function(req, res) {
             })
         }
     })
+})
+
+app.get('/logoff',function(req, res) {
+    var name = usern.username.toString();
+    User.remove({username:name}, function (err, content) {
+        if(err){console.log("注销失败！")}
+        else{
+            console.log("注销成功！")
+            ejs.renderFile("public/index.html",(err,str)=>{
+                res.send(str)
+            })
+        }
+    })
+})
+app.get('/change',function(req, res) {
+    var name = usern.username.toString();
+    var password = usern.password.toString();
+    ejs.renderFile("public/change.html",{returnName:name},(err,str)=>{
+        res.send(str)
+    })
+})
+
+app.get('/changepass',function(req, res) {
+    var name = usern.username.toString();
+    var password = usern.password.toString();
+    var rpass = req.query.rpassword;
+    var npass = req.query.npassword;
+    if(rpass == password){
+        User.updateOne({title:'hello'},{$set:{number:3}},{safe:true},function(err,result){
+        ejs.renderFile("public/change2.html",{returnName:name,returnVal:"修改成功！"},(err,str)=>{
+            res.send(str)
+        })
+    })
+    }else{
+        ejs.renderFile("public/change2.html",{returnName:name,returnVal:"修改失败！"},(err,str)=>{
+            res.send(str)
+        })
+    }
 })
 app.listen(08150)

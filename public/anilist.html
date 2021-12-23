@@ -49,9 +49,7 @@
 				<div class="list-group">
 					<a href="/myInfo" class="list-group-item list-group-item-action">我的信息</a>
 					<a href="/animallist"
-						class="list-group-item list-group-item-action">领养列表</a> <a
-						href="/myapply"
-						class="list-group-item list-group-item-action">我的领养申请</a> <a
+						class="list-group-item list-group-item-action">领养列表</a><a
 						href="/anipost" class="list-group-item list-group-item-action">流浪动物上传</a>
 					<a
 						href="/LogOut" class="list-group-item list-group-item-action">登出</a>
@@ -87,7 +85,7 @@
 									<td><%=searchani[i].animal%></td>
 									<td><%=searchani[i].variety%></td>
 									<td><%=searchani[i].age%></td>
-									<td><form action="/more" method="get"><button type="submit" class="btn btn-info" name = index value=<%=i%>>查看详情</button></form></td>
+									<td><form action="/more" method="get"><button type="submit" class="btn btn-outline-info" name = index value=<%=i%>>查看详情</button></form></td>
 								</tr>
 							<% }%>
 						</tbody>

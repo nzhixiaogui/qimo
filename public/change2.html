@@ -59,41 +59,35 @@
 				<hr class="d-sm-none">
 			</div>
 			<div class="col-sm-8">
-				<h2 style="color: rgb(64, 147, 224)">我的信息</h2>
+				<form method="get" action="/changpass"
+							enctype="multipart/form-data">
+				<h2 style="color: rgb(240, 62, 17)">修改密码</h2>
 				<div class="form-group row"></div>
+				<p style="color: red;"><%=returnVal%></p>
 				<div class="form-group row">
 					<div class="col-sm-6">
 						<h4>用户名：<%= usern %></h4>
 					</div>
 					<div class="col-sm-6">
-						<h4>密码：<%= userp %></h4>
+						<h4>旧密码：<input type="password" name="rpassword" class="form-control"
+							id="inputPassword3" placeholder="旧密码"></h4>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-8">
-						<h5>性别：<%= users %></h5>
+						<h5>新密码：<input type="password" name="npassword" class="form-control"
+							id="inputPassword3" placeholder="新密码"></h5>
 					</div>
 				</div>
-				<div class="form-group row">
-					<div class="col-sm-8">
-						<h5>是否喜爱动物：<%= userl %></h5>
-					</div>
-				</div>
-				<div class="form-group row">
-					<div class="col-sm-8">
-						<h5>月收入：<%= userpp %></h5>
-					</div>
-				</div>
-
 				<div class="form-group row">
 					<div class="col-sm-9">
-						<a type="button" class="btn btn-outline-danger" href="/logoff">注销</a>
+						<a type="button" class="btn btn-outline-danger" href="/logoff">提交</a>
 					</div>
 					<div class="col-sm-3">
-						<a type="button" class="btn btn-dark" href="/home">返回主页</a>
+						<a type="button" class="btn btn-dark" href="/myInfo">返回</a>
 					</div>
 				</div>
-
+				</form>
 				<br>
 			</div>
 		</div>
