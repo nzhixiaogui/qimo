@@ -11,7 +11,8 @@ const schema0={
    password:String,
    sex:String,
    love_animal:String,
-   property:String
+   property:String,
+   flag:Number
 }
 const User = mongoose.model('users', schema0);
 const schema1={
@@ -41,6 +42,13 @@ app.get('/home', function(req, res) {
     })
 })
 
+app.get('/home2', function(req, res) {
+    var name = usern.username.toString();
+    ejs.renderFile("public/home2.html",{returnVal:name},(err,str)=>{
+        res.send(str)
+    })
+})
+
 app.get('/LoginAction', function(req, res) {
     var usn = req.query.username;
     var pwd = req.query.password;
@@ -59,9 +67,16 @@ app.get('/LoginAction', function(req, res) {
                 console.log('登录成功！')
                 usern = content
                 var name = usern.username.toString();
-                ejs.renderFile("public/home.html",{returnVal:name},(err,str)=>{
-                    res.send(str)
-                })
+                if(usern.flag){
+                    ejs.renderFile("public/home2.html",{returnVal:name},(err,str)=>{
+                        res.send(str)
+                    })
+                }else{
+                    ejs.renderFile("public/home.html",{returnVal:name},(err,str)=>{
+                        res.send(str)
+                    })
+                }
+                
             } else  {
                 console.log('登录失败！')
                 ejs.renderFile("public/index1.html",{returnVal:"密码错误 登录失败！"},(err,str)=>{
@@ -116,7 +131,8 @@ app.get('/RegAction', function(req, res) {
                     password: pwd,
                     sex:sex,
                     love_animal:lva,
-                    property:ppt
+                    property:ppt,
+                    flag:0
                 }, function(err1, doc) {
                     if (err1) {
                         console.log('注册失败！')
@@ -204,6 +220,32 @@ app.get('/animallist', function(req, res) {
     })
 })
 
+app.get('/animallist2', function(req, res) {
+    var name = usern.username.toString();
+    Ani.find(function(err,search){
+        if(err){console.log("查找失败！")}
+        else{
+            console.log("查找成功！")
+            ejs.renderFile("public/anilist2.html",{returnName:name,searchani:search},(err,str)=>{
+                res.send(str)
+            })
+        }
+    })
+})
+
+app.get('/userlist', function(req, res) {
+    var name = usern.username.toString();
+    User.find({"flag":0},function(err,search){
+        if(err){console.log("查找失败！")}
+        else{
+            console.log("查找成功！")
+            ejs.renderFile("public/userlist.html",{returnName:name,searchani:search},(err,str)=>{
+                res.send(str)
+            })
+        }
+    })
+})
+
 app.get('/anipost', function(req, res) {
     var name = usern.username.toString();
     Ani.find(function(err,search){
@@ -272,6 +314,20 @@ app.get('/more',function(req, res) {
     })
 })
 
+app.get('/more2',function(req, res) {
+    var name = usern.username.toString();
+    var i = req.query.index
+    console.log(i)
+    Ani.findOne({index: i}, function (err, content) {
+        if(err){console.log("查看详情失败！")}
+        else{
+            ejs.renderFile("public/aniinfo2.html",{returnName:name,info:content},(err,str)=>{
+                res.send(str)
+            })
+        }
+    })
+})
+
 app.get('/logoff',function(req, res) {
     var name = usern.username.toString();
     User.remove({username:name}, function (err, content) {
@@ -318,5 +374,25 @@ app.get('/changepass',function(req, res) {
             res.send(str)
         })
     }
+})
+
+app.get('/delete',function(req, res) {
+    var name = usern.username.toString();
+    var i = req.query.index;
+    Ani.remove({index:i}, function (err, content) {
+        if(err){console.log("删除失败！")}
+        else{
+            console.log("删除成功！")
+            Ani.find(function(err,search){
+                if(err){console.log("查找失败！")}
+                else{
+                    console.log("查找成功！")
+                    ejs.renderFile("public/anilist2.html",{returnName:name,searchani:search},(err,str)=>{
+                        res.send(str)
+                    })
+                }
+            })
+        }
+    })
 })
 app.listen(08150)
