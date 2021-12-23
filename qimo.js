@@ -54,7 +54,7 @@ app.get('/LoginAction', function(req, res) {
             })
         } else {
             var cpwd = content.password;
-            console.log(cpwd)
+            //console.log(cpwd)
             if (pwd == cpwd) {
                 console.log('登录成功！')
                 usern = content
@@ -74,13 +74,18 @@ app.get('/LoginAction', function(req, res) {
 
 app.get('/myInfo', function(req, res) {
     var name = usern.username.toString();
-    var password = usern.password.toString();
     var sex = usern.sex.toString();
     var love = usern.love_animal.toString();
     var ppt = usern.property.toString();
-
-    ejs.renderFile("public/myInfo.html",{usern:name,userp:password,users:sex,userl:love,userpp:ppt},(err,str)=>{
-        res.send(str)
+    User.findOne({username: name}, function (err, content) {
+        if(err){console.log(err);}
+        else{
+            usern = content;
+            var password = usern.password.toString();
+            ejs.renderFile("public/myInfo.html",{usern:name,userp:password,users:sex,userl:love,userpp:ppt},(err,str)=>{
+                res.send(str)
+            })
+        }
     })
  })
 
@@ -279,10 +284,18 @@ app.get('/logoff',function(req, res) {
         }
     })
 })
+
+app.get('/logoffy',function(req, res) {
+    var name = usern.username.toString();
+    ejs.renderFile("public/logoff.html",{usern:name},(err,str)=>{
+        res.send(str)
+    })
+})
+
 app.get('/change',function(req, res) {
     var name = usern.username.toString();
     var password = usern.password.toString();
-    ejs.renderFile("public/change.html",{returnName:name},(err,str)=>{
+    ejs.renderFile("public/change.html",{usern:name,},(err,str)=>{
         res.send(str)
     })
 })
@@ -290,16 +303,18 @@ app.get('/change',function(req, res) {
 app.get('/changepass',function(req, res) {
     var name = usern.username.toString();
     var password = usern.password.toString();
-    var rpass = req.query.rpassword;
-    var npass = req.query.npassword;
+    var rpass = req.query.rpassword.toString();
+    var npass = req.query.npassword.toString();
     if(rpass == password){
-        User.updateOne({title:'hello'},{$set:{number:3}},{safe:true},function(err,result){
-        ejs.renderFile("public/change2.html",{returnName:name,returnVal:"修改成功！"},(err,str)=>{
+        User.updateOne({username:name},{$set:{password:npass}},{safe:true},function(err,result){
+            console.log("修改成功！")
+        ejs.renderFile("public/change2.html",{usern:name,returnVal:"修改成功！"},(err,str)=>{
             res.send(str)
         })
     })
     }else{
-        ejs.renderFile("public/change2.html",{returnName:name,returnVal:"修改失败！"},(err,str)=>{
+        console.log("旧密码错误 修改失败！")
+        ejs.renderFile("public/change2.html",{usern:name,returnVal:"旧密码错误 修改失败！"},(err,str)=>{
             res.send(str)
         })
     }

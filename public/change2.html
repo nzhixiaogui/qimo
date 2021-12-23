@@ -59,29 +59,38 @@
 				<hr class="d-sm-none">
 			</div>
 			<div class="col-sm-8">
-				<form method="get" action="/changpass"
+				<form method="get" action="/changepass"
 							enctype="multipart/form-data">
 				<h2 style="color: rgb(240, 62, 17)">修改密码</h2>
 				<div class="form-group row"></div>
-				<p style="color: red;"><%=returnVal%></p>
 				<div class="form-group row">
 					<div class="col-sm-6">
 						<h4>用户名：<%= usern %></h4>
 					</div>
+				</div>
+				<div class="form-group row">
 					<div class="col-sm-6">
-						<h4>旧密码：<input type="password" name="rpassword" class="form-control"
-							id="inputPassword3" placeholder="旧密码"></h4>
+					<h5 style="color: red;"><%=returnVal%></h5>
+				</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<h5>旧密码：</h5>
+							<input type="password" name="rpassword" class="form-control"
+							id="inputPassword3" placeholder="旧密码">
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-8">
-						<h5>新密码：<input type="password" name="npassword" class="form-control"
-							id="inputPassword3" placeholder="新密码"></h5>
+						<h5>新密码：</h5>
+						<input type="password" name="npassword" class="form-control"
+							id="inputPassword3" placeholder="新密码">
 					</div>
 				</div>
+				<div class="form-group row"></div>
 				<div class="form-group row">
 					<div class="col-sm-9">
-						<a type="button" class="btn btn-outline-danger" href="/logoff">提交</a>
+						<button type="submit" class="btn btn-outline-success">提交</button>
 					</div>
 					<div class="col-sm-3">
 						<a type="button" class="btn btn-dark" href="/myInfo">返回</a>
